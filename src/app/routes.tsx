@@ -1,33 +1,34 @@
 // PORT
-const port = 3001;
+const port = 8080;
+const url = "52.53.155.96";
 
 // STORE
-export const getCatogue = `http://localhost:${port}/getCatalogue`;
-export const getProduct = `http://localhost:${port}/getProduct`;
-export const getProductByName = `http://localhost:${port}/getProductByName`;
-export const addProduct = `http://localhost:${port}/addProduct`;
-export const modifyProduct = `http://localhost:${port}/updateProduct`;
+export const getCatogue = `${url}:${port}/getCatalogue`;
+export const getProduct = `${url}:${port}/getProduct`;
+export const getProductByName = `${url}:${port}/getProductByName`;
+export const addProduct = `${url}:${port}/addProduct`;
+export const modifyProduct = `${url}:${port}/updateProduct`;
 
-// export const updateCart = `http://localhost:${port}/updateCart`;
-export const deleteProduct = `http://localhost:${port}/deleteProduct`;
+// export const updateCart = `${url}:${port}/updateCart`;
+export const deleteProduct = `${url}:${port}/deleteProduct`;
 
 // FILTER
-export const getCategories = `http://localhost:${port}/getCategories`;
+export const getCategories = `${url}:${port}/getCategories`;
 
 // GALLERY
-export const getContent = `http://localhost:${port}/getContent`;
-export const getGallery = `http://localhost:${port}/getAllContent`;
-export const addContent = `http://localhost:${port}/addContent`;
-export const modifyContent = `http://localhost:${port}/updateContent`;
-export const deleteContent = `http://localhost:${port}/deleteContent`;
+export const getContent = `${url}:${port}/getContent`;
+export const getGallery = `${url}:${port}/getAllContent`;
+export const addContent = `${url}:${port}/addContent`;
+export const modifyContent = `${url}:${port}/updateContent`;
+export const deleteContent = `${url}:${port}/deleteContent`;
 
 // USER
-export const getUserInfo = `http://localhost:${port}/infoUser`;
-export const getHistory = `http://localhost:${port}/getPurchaseHistory`;
-export const getCart = `http://localhost:${port}/getCart`;
-export const updateCart = `http://localhost:${port}/updateCart`;
-export const makePurchase = `http://localhost:${port}/makePurchase`;
-export const addUser = `http://localhost:${port}/addUser`;
-export const updatePurchaseState = `http://localhost:${port}/updatePurchaseState`;
+export const getUserInfo = `${url}:${port}/infoUser`;
+export const getHistory = `${url}:${port}/getPurchaseHistory`;
+export const getCart = `${url}:${port}/getCart`;
+export const updateCart = `${url}:${port}/updateCart`;
+export const makePurchase = `${url}:${port}/makePurchase`;
+export const addUser = `${url}:${port}/addUser`;
+export const updatePurchaseState = `${url}:${port}/updatePurchaseState`;
 
 // USER ROUTES
