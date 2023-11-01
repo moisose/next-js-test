@@ -1,34 +1,34 @@
 // PORT
 const port = 8080;
-const url = "52.53.155.96";
+const urlAPI = "52.53.155.96";
 
 // STORE
-export const getCatogue = `${url}:${port}/getCatalogue`;
-export const getProduct = `${url}:${port}/getProduct`;
-export const getProductByName = `${url}:${port}/getProductByName`;
-export const addProduct = `${url}:${port}/addProduct`;
-export const modifyProduct = `${url}:${port}/updateProduct`;
+export const getCatogue = `${urlAPI}:${port}/getCatalogue`;
+export const getProduct = `${urlAPI}:${port}/getProduct`;
+export const getProductByName = `${urlAPI}:${port}/getProductByName`;
+export const addProduct = `${urlAPI}:${port}/addProduct`;
+export const modifyProduct = `${urlAPI}:${port}/updateProduct`;
 
-// export const updateCart = `${url}:${port}/updateCart`;
-export const deleteProduct = `${url}:${port}/deleteProduct`;
+// export const updateCart = `${urlAPI}:${port}/updateCart`;
+export const deleteProduct = `${urlAPI}:${port}/deleteProduct`;
 
 // FILTER
-export const getCategories = `${url}:${port}/getCategories`;
+export const getCategories = `${urlAPI}:${port}/getCategories`;
 
 // GALLERY
-export const getContent = `${url}:${port}/getContent`;
-export const getGallery = `${url}:${port}/getAllContent`;
-export const addContent = `${url}:${port}/addContent`;
-export const modifyContent = `${url}:${port}/updateContent`;
-export const deleteContent = `${url}:${port}/deleteContent`;
+export const getContent = `${urlAPI}:${port}/getContent`;
+export const getGallery = `${urlAPI}:${port}/getAllContent`;
+export const addContent = `${urlAPI}:${port}/addContent`;
+export const modifyContent = `${urlAPI}:${port}/updateContent`;
+export const deleteContent = `${urlAPI}:${port}/deleteContent`;
 
 // USER
-export const getUserInfo = `${url}:${port}/infoUser`;
-export const getHistory = `${url}:${port}/getPurchaseHistory`;
-export const getCart = `${url}:${port}/getCart`;
-export const updateCart = `${url}:${port}/updateCart`;
-export const makePurchase = `${url}:${port}/makePurchase`;
-export const addUser = `${url}:${port}/addUser`;
-export const updatePurchaseState = `${url}:${port}/updatePurchaseState`;
+export const getUserInfo = `${urlAPI}:${port}/infoUser`;
+export const getHistory = `${urlAPI}:${port}/getPurchaseHistory`;
+export const getCart = `${urlAPI}:${port}/getCart`;
+export const updateCart = `${urlAPI}:${port}/updateCart`;
+export const makePurchase = `${urlAPI}:${port}/makePurchase`;
+export const addUser = `${urlAPI}:${port}/addUser`;
+export const updatePurchaseState = `${urlAPI}:${port}/updatePurchaseState`;
 
 // USER ROUTES
