@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import { useAuthContext } from "../../../context/AuthContext";
 import { useRouter } from "next/navigation";

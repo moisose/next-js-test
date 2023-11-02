@@ -1,34 +1,33 @@
 // PORT
-const port = 8080;
-const urlAPI = "http://52.53.155.96";
+const port = 3001;
 
 // STORE
-export const getCatogue = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getCatalogue`;
-export const getProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getProduct`;
-export const getProductByName = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getProductByName`;
-export const addProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/addProduct`;
-export const modifyProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateProduct`;
+export const getCatogue = `http://localhost:${port}/getCatalogue`;
+export const getProduct = `http://localhost:${port}/getProduct`;
+export const getProductByName = `http://localhost:${port}/getProductByName`;
+export const addProduct = `http://localhost:${port}/addProduct`;
+export const modifyProduct = `http://localhost:${port}/updateProduct`;
 
-// export const updateCart = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateCart`;
-export const deleteProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/deleteProduct`;
+// export const updateCart = `http://localhost:${port}/updateCart`;
+export const deleteProduct = `http://localhost:${port}/deleteProduct`;
 
 // FILTER
-export const getCategories = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getCategories`;
+export const getCategories = `http://localhost:${port}/getCategories`;
 
 // GALLERY
-export const getContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getContent`;
-export const getGallery = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getAllContent`;
-export const addContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/addContent`;
-export const modifyContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateContent`;
-export const deleteContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/deleteContent`;
+export const getContent = `http://localhost:${port}/getContent`;
+export const getGallery = `http://localhost:${port}/getAllContent`;
+export const addContent = `http://localhost:${port}/addContent`;
+export const modifyContent = `http://localhost:${port}/updateContent`;
+export const deleteContent = `http://localhost:${port}/deleteContent`;
 
 // USER
-export const getUserInfo = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/infoUser`;
-export const getHistory = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getPurchaseHistory`;
-export const getCart = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getCart`;
-export const updateCart = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateCart`;
-export const makePurchase = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/makePurchase`;
-export const addUser = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/addUser`;
-export const updatePurchaseState = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updatePurchaseState`;
+export const getUserInfo = `http://localhost:${port}/infoUser`;
+export const getHistory = `http://localhost:${port}/getPurchaseHistory`;
+export const getCart = `http://localhost:${port}/getCart`;
+export const updateCart = `http://localhost:${port}/updateCart`;
+export const makePurchase = `http://localhost:${port}/makePurchase`;
+export const addUser = `http://localhost:${port}/addUser`;
+export const updatePurchaseState = `http://localhost:${port}/updatePurchaseState`;
 
 // USER ROUTES
