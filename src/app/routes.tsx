@@ -1,35 +1,33 @@
 // PORT
 const port = 3001;
-const apiUrl =
-  "https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api";
 
 // STORE
-export const getCatogue = `${apiUrl}/getCatalogue`;
-export const getProduct = `${apiUrl}/getProduct`;
-export const getProductByName = `${apiUrl}/getProductByName`;
-export const addProduct = `${apiUrl}/addProduct`;
-export const modifyProduct = `${apiUrl}/updateProduct`;
+export const getCatogue = `http://localhost:${port}/getCatalogue`;
+export const getProduct = `http://localhost:${port}/getProduct`;
+export const getProductByName = `http://localhost:${port}/getProductByName`;
+export const addProduct = `http://localhost:${port}/addProduct`;
+export const modifyProduct = `http://localhost:${port}/updateProduct`;
 
-// export const updateCart = `${apiUrl}/updateCart`;
-export const deleteProduct = `${apiUrl}/deleteProduct`;
+// export const updateCart = `http://localhost:${port}/updateCart`;
+export const deleteProduct = `http://localhost:${port}/deleteProduct`;
 
 // FILTER
-export const getCategories = `${apiUrl}/getCategories`;
+export const getCategories = `http://localhost:${port}/getCategories`;
 
 // GALLERY
-export const getContent = `${apiUrl}/getContent`;
-export const getGallery = `${apiUrl}/getAllContent`;
-export const addContent = `${apiUrl}/addContent`;
-export const modifyContent = `${apiUrl}/updateContent`;
-export const deleteContent = `${apiUrl}/deleteContent`;
+export const getContent = `http://localhost:${port}/getContent`;
+export const getGallery = `http://localhost:${port}/getAllContent`;
+export const addContent = `http://localhost:${port}/addContent`;
+export const modifyContent = `http://localhost:${port}/updateContent`;
+export const deleteContent = `http://localhost:${port}/deleteContent`;
 
 // USER
-export const getUserInfo = `${apiUrl}/infoUser`;
-export const getHistory = `${apiUrl}/getPurchaseHistory`;
-export const getCart = `${apiUrl}/getCart`;
-export const updateCart = `${apiUrl}/updateCart`;
-export const makePurchase = `${apiUrl}/makePurchase`;
-export const addUser = `${apiUrl}/addUser`;
-export const updatePurchaseState = `${apiUrl}/updatePurchaseState`;
+export const getUserInfo = `http://localhost:${port}/infoUser`;
+export const getHistory = `http://localhost:${port}/getPurchaseHistory`;
+export const getCart = `http://localhost:${port}/getCart`;
+export const updateCart = `http://localhost:${port}/updateCart`;
+export const makePurchase = `http://localhost:${port}/makePurchase`;
+export const addUser = `http://localhost:${port}/addUser`;
+export const updatePurchaseState = `http://localhost:${port}/updatePurchaseState`;
 
 // USER ROUTES
