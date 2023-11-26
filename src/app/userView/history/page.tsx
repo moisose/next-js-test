@@ -4,13 +4,12 @@ import React, { Fragment, useState, useEffect } from "react";
 import Footer from "../../../components/footer";
 import axios from "axios";
 import Navbar2 from "@/src/components/navbar2";
+import ImageLink from "@/src/components/ImageLink";
 import * as Routes from "../../routes";
 import { auth } from "../../../firebase/config";
 import { set } from "firebase/database";
 import Modal from "../../../components/modal"; // overlay
 import { BiMessageAdd } from "react-icons/bi";
-
-const baseURL = "https://mocki.io/v1/2f52d417-4d0d-4ed4-8c97-97131eb8ceb6";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -48,6 +47,22 @@ const History = () => {
     return () => unsubscribe();
   }, [authUser.uid]);
 
+  // function that returns a formatted date in string format
+  const formatearFecha = (cadenaTiempo) => {
+    const fecha = new Date(cadenaTiempo);
+
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth() + 1; // Nota: los meses comienzan desde 0
+    const año = fecha.getFullYear();
+
+    // Agrega ceros a la izquierda si es necesario
+    const diaFormateado = dia < 10 ? `0${dia}` : dia;
+    const mesFormateado = mes < 10 ? `0${mes}` : mes;
+    const añoFormateado = año;
+
+    return `${diaFormateado}/${mesFormateado}/${añoFormateado}`;
+  };
+
   console.log(history);
   return (
     <Fragment>
@@ -59,9 +74,7 @@ const History = () => {
           {history.map((item) => (
             <div key={item._id} className="text-yellow-900">
               <hr className="border border-red-400 w-6/6 mx-auto my-4"></hr>
-              <h1 className="text-2xl text-red-400 mb-2">
-                Compra {item.purchaseId}
-              </h1>
+              <h1 className="text-2xl text-red-400 mb-2">Compra {item._id}</h1>
               <div className="pl-8">
                 <h2 className="font-bold">Productos:</h2>
                 <ul className="list-disc ml-8 mb-4">
@@ -72,35 +85,22 @@ const History = () => {
                   ))}
                 </ul>
                 <h2 className="mb-3">
-                  <b>Total:</b> ${item.shippingPrice}
+                  <b>Total:</b> ${item.shippingPrice.toFixed(2)}
                 </h2>
                 <h2 className="mb-3">
                   <b>Direccion:</b> {item.shippingAddress}
                 </h2>
                 <h2 className="mb-3">
-                  <b>Fecha:</b> {item.aproxDeliveryDate}
+                  <b>Fecha:</b> {formatearFecha(item.aproxDeliveryDate)}
+                </h2>
+                <h2 className="mb-3">
+                  <b>Estado:</b> {item.state}
                 </h2>
                 <h2 className="mb-3">
                   <b>Voucher:</b>
                 </h2>
-                {/* <button
-                  className="text-white border bg-red-500 border-red-500 rounded-lg py-2 px-5 hover:bg-red-400"
-                  onClick={() => setShowModal(true)}
-                >
-                  Voucher
-                </button> */}
-                <div className="w-[200px] ml-24">
-                  <img src={item.voucherId}></img>
-                </div>
 
-                {/* <Modal
-                  isVisible={showModal}
-                  onClose={() => setShowModal(false)}
-                >
-                  <div className="p-6 w-[700px] flex justify-center items-center">
-                    <img src={item.voucherId}></img>
-                  </div>
-                </Modal> */}
+                <ImageLink imageUrl={item.voucherId} />
               </div>
             </div>
           ))}

@@ -1,33 +1,46 @@
 // PORT
 const port = 3001;
+const httpsApiUrl = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api`;
 
 // STORE
-export const getCatogue = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getCatalogue`;
-export const getProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getProduct`;
-export const getProductByName = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getProductByName`;
-export const addProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/addProduct`;
-export const modifyProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateProduct`;
+export const getCatogue = `${httpsApiUrl}/getCatalogue`;
+export const getProduct = `${httpsApiUrl}/getProduct`;
+export const getProductByName = `${httpsApiUrl}/getProductByName`;
+export const addProduct = `${httpsApiUrl}/addProduct`;
+export const modifyProduct = `${httpsApiUrl}/updateProduct`;
 
-// export const updateCart = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateCart`;
-export const deleteProduct = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/deleteProduct`;
+// export const updateCart = `${httpsApiUrl}/updateCart`;
+export const deleteProduct = `${httpsApiUrl}/deleteProduct`;
 
 // FILTER
-export const getCategories = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getCategories`;
+export const getCategories = `${httpsApiUrl}/getCategories`;
 
 // GALLERY
-export const getContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getContent`;
-export const getGallery = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getAllContent`;
-export const addContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/addContent`;
-export const modifyContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateContent`;
-export const deleteContent = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/deleteContent`;
+export const getContent = `${httpsApiUrl}/getContent`;
+export const getGallery = `${httpsApiUrl}/getAllContent`;
+export const addContent = `${httpsApiUrl}/addContent`;
+export const modifyContent = `${httpsApiUrl}/updateContent`;
+export const deleteContent = `${httpsApiUrl}/deleteContent`;
 
 // USER
-export const getUserInfo = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/infoUser`;
-export const getHistory = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getPurchaseHistory`;
-export const getCart = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/getCart`;
-export const updateCart = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updateCart`;
-export const makePurchase = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/makePurchase`;
-export const addUser = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/addUser`;
-export const updatePurchaseState = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api/updatePurchaseState`;
+export const getUserInfo = `${httpsApiUrl}/infoUser`;
+export const getHistory = `${httpsApiUrl}/getPurchaseHistory`;
+export const getCart = `${httpsApiUrl}/getCart`;
+export const updateCart = `${httpsApiUrl}/updateCart`;
+export const makePurchase = `${httpsApiUrl}/makePurchase`;
+export const addUser = `${httpsApiUrl}/addUser`;
+export const updatePurchaseState = `${httpsApiUrl}/updatePurchaseState`;
+export const getNotifications = `${httpsApiUrl}/getNotifications`;
+export const updateNotificationState = `${httpsApiUrl}/updateNotificationState`;
+export const isUnread = `${httpsApiUrl}/isUnread`;
+
+// CALENDAR
+export const getCalendar = `${httpsApiUrl}/getCalendar`;
+export const filterCalendar = `${httpsApiUrl}/filterCalendar`;
+export const createEvent = `${httpsApiUrl}/createEvent`;
+export const getEvent = `${httpsApiUrl}/getEvent`;
+export const updateEvent = `${httpsApiUrl}/updateEvent`;
+export const deleteEvent = `${httpsApiUrl}/deleteEvent`;
+export const verifyOverlap = `${httpsApiUrl}/verifyOverlap`;
 
 // USER ROUTES

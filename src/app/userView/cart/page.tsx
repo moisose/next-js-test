@@ -178,7 +178,7 @@ const Cart = () => {
                       <h1 className="text-2xl font-bold mb-3">{item.name}</h1>
                       <p className="mb-2">{item.additionalData.description}</p>
                       <p>
-                        <b>Precio:</b> ${item.additionalData.price}
+                        <b>Precio:</b> ${item.additionalData.price.toFixed(2)}
                       </p>
                       <p className="mb-3">
                         <b>Cantidad:</b>{" "}
@@ -204,7 +204,9 @@ const Cart = () => {
                 <div className="bg-white flex-col p-4 ">
                   <div className="w-2/3 text-black border border-yellow-900 text-yellow-900 rounded-lg mb-5 p-5">
                     <h1 className="text-2xl">Total</h1>
-                    <h1 className="text-3xl font-bold">$ {costoTotal}</h1>
+                    <h1 className="text-3xl font-bold">
+                      $ {costoTotal.toFixed(2)}
+                    </h1>
                   </div>
                   <div className="w-2/3 text-black ">
                     <h1>
