@@ -9,7 +9,6 @@ import { IoExitOutline } from "react-icons/io5";
 import { GoHistory } from "react-icons/go";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useAuthContext } from "../context/AuthContext";
-import { BiMessageDetail } from "react-icons/bi";
 import { MdOutlineNotifications } from "react-icons/md";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import axios from "axios";
@@ -17,7 +16,7 @@ import { auth } from "../firebase/config";
 import * as Routes from "../app/routes";
 import Router from "next/router";
 
-const NavbarAdminGallery = () => {
+const NavbarCalendar = () => {
   const [authUser, setAuthUser] = useState({ uid: "", email: "" });
   const [unread, setUnread] = useState(false);
 
@@ -95,30 +94,30 @@ const NavbarAdminGallery = () => {
                   href="/adminView/historyAdmin"
                   title="historial de pedidos"
                 >
-                  <GoHistory className="text-3xl" />
+                  <GoHistory className="text-3xl mr-5" />
                 </a>
               </li>
               {/* <!-- Calendar link --> */}
-              <li className="mb-4 pl-2 lg:mb-0 lg:pl-3 lg:pr-1">
+              <li className="mb-4 pl-2 lg:mb-0 lg:pl-0 lg:pr-1">
                 <a className="" href="/adminView/calendar" title="agenda">
-                  <TbNotebook className="text-3xl mr-3" />
+                  <TbNotebook className="text-3xl mr-5" />
                 </a>
               </li>
-
-              {/* <!-- AddContent link --> */}
+              {/* <!-- AddEvent link --> */}
               <li className="mb-4 pl-2 lg:mb-0 lg:pl-0 lg:pr-1">
                 <a
                   className=""
-                  href="/adminView/addProduct"
-                  title="añadir producto"
+                  href="/adminView/addEvent"
+                  title="añadir contenido"
                 >
                   <AiOutlinePlusCircle className="text-3xl" />
                 </a>
               </li>
+
               <li>
                 <a
                   className="text-3xl font-bold text-yellow-900 px-20"
-                  href="/mainPage"
+                  href="/adminView/mainPageAdmin"
                   title="Ir a la página de inicio"
                 >
                   TIENDA DUENDE
@@ -169,4 +168,4 @@ const NavbarAdminGallery = () => {
   );
 };
 
-export default NavbarAdminGallery;
+export default NavbarCalendar;
