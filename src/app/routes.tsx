@@ -1,6 +1,6 @@
 // PORT
 const port = 3001;
-const httpsApiUrl = `https://us-central1-proyectodisenno-7d92d.cloudfunctions.net/api`;
+const httpsApiUrl = `https://us-central1-disenno-software-8bfbc.cloudfunctions.net/api`;
 
 // STORE
 export const getCatogue = `${httpsApiUrl}/getCatalogue`;

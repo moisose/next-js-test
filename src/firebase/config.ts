@@ -7,7 +7,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAUMTRo2R_g7Z1Vkhx4bjOqnqPQD7UZMDg",
+  apiKey: "AIzaSyCCPs-L93nrG742kxUf8XbKAYB2KeAH7v4",
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
@@ -22,6 +22,6 @@ export const auth = getAuth(firebase_app);
 
 export default firebase_app;
 
-export const firebaseStorageURL = "gs://proyectodisenno-7d92d.appspot.com";
+export const firebaseStorageURL = "gs://disenno-software-8bfbc.appspot.com";
 
 export const storage = getStorage(firebase_app);
