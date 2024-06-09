@@ -1,12 +1,9 @@
 // @ts-nocheck
 "use client";
-import React from "react";
-import Navbar2 from "@/src/components/navbar2";
+import React, { useEffect, useState } from "react";
+import NavbarAdmin from "@/src/components/navbarAdmin";
 import Footer from "@/src/components/footer";
-import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
-import { Handlee } from "next/font/google";
-import { Link } from "react-router-dom";
 import { useRouter } from "next/navigation";
 import * as Routes from "../../../../routes";
 
@@ -60,14 +57,20 @@ const ModifyContent = ({ params }: PageProps) => {
 
         setTitle(result.data.title);
         setDescription(result.data.description);
-        setKeyWords(result.data.tags);
+
+        // Agregar # a cada palabra clave
+        const formattedKeywords = result.data.tags
+          .map((tag) => `#${tag}`)
+          .join("");
+        setKeyWords(formattedKeywords);
+
         setImagenURL(result.data.imageId);
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
     }
     fetchData();
-  }, []);
+  }, [params.id]);
 
   const handleImageChange = (e) => {
     // Captura la imagen seleccionada por el usuario
@@ -89,7 +92,7 @@ const ModifyContent = ({ params }: PageProps) => {
       const imageURL = URL.createObjectURL(files[0]);
       setImagenURL(imageURL);
     } else {
-      MessageChannel.error("File size to large");
+      console.error("File size too large");
     }
   };
 
@@ -116,7 +119,7 @@ const ModifyContent = ({ params }: PageProps) => {
             }
           },
           (error) => {
-            message.error(error.message);
+            console.error(error.message);
             reject(error); // Rechazar la promesa en caso de error
           },
           () => {
@@ -125,20 +128,20 @@ const ModifyContent = ({ params }: PageProps) => {
 
               // Guardar url en estado
               setNewImageURL(url);
-              resolve(); // Resolver promesa
+              resolve(url); // Resolver promesa con la URL de la imagen
             });
           }
         );
       } else {
-        // En este caso, también puedes rechazar la promesa si no se encuentra el archivo
-        //reject(new Error("File not found"));
+        // Resolver la promesa con la URL de la imagen existente
+        resolve(imagenURL);
       }
     });
   };
 
-  const SubmitData = async () => {
+  const SubmitData = async (imageUrl) => {
     // Arreglar
-    if (title && description && KeyWords && imagen) {
+    if (title && description && KeyWords !== "" && KeyWords != null) {
       const date = new Date();
       const day = date.getDate();
       const month = date.getMonth() + 1;
@@ -148,54 +151,43 @@ const ModifyContent = ({ params }: PageProps) => {
       setKeyWordsBox(KeyWords);
       console.log("Key ", KeyWords);
 
-      if (title && description && KeyWords && imagen) {
-        const regex = /#\w+/g;
-        const matches = KeyWords.match(regex);
+      const regex = /#\w+/g;
+      const matches = KeyWords.match(regex);
 
-        // if (imagen != null) {
-        //   const newImageUrl = await handleUploadedFile();
-        // }
+      if (matches && matches.join("") === KeyWords) {
+        const valTags = matches.map((tag) => tag.replace("#", ""));
 
-        //let imageURLToUse = newImageURL || imagenURL;
-        console.log("resultado");
+        const datos = {
+          _id: params.id,
+          title: title,
+          description: description,
+          date: formatedDate,
+          imageId: imageUrl,
+          categoryName: "terror",
+          tags: valTags,
+        };
 
-        if (matches && matches.join("") === KeyWords) {
-          const valTags = matches.map((tag) => tag.replace("#", ""));
+        console.log("Estos son los datos enviados:", datos);
 
-          const datos = {
-            _id: params.id,
-            title: title,
-            description: description,
-            date: formatedDate,
-            imageId: newImageURL,
-            categoryName: "terror", // Quemado
-            tags: valTags,
-          };
+        const fetchData = async () => {
+          try {
+            const result = await axios.request({
+              method: "put",
+              url: Routes.modifyContent,
+              headers: { "Content-Type": "application/json" },
+              data: datos,
+            });
+            console.log("fetch");
+            console.log(result);
+            router.push("/adminView/galleryAdmin");
+          } catch (error) {
+            console.error("Error al obtener datos:", error);
+          }
+        };
 
-          console.log("Estos son los datos enviados:", datos);
-
-          const fetchData = async () => {
-            try {
-              const result = await axios.request({
-                method: "put",
-                url: Routes.modifyContent,
-                headers: { "Content-Type": "application/json" },
-                data: datos,
-              });
-              console.log("fetch");
-              console.log(result);
-              router.push("/adminView/galleryAdmin");
-            } catch (error) {
-              console.error("Error al obtener datos:", error);
-            }
-          };
-
-          fetchData();
-        } else {
-          alert("Los tags no siguen el formato correcto");
-        }
+        fetchData();
       } else {
-        alert("Por favor, complete todos los campos.");
+        alert("Los tags no siguen el formato correcto");
       }
     } else {
       alert("Por favor, complete todos los campos.");
@@ -205,14 +197,15 @@ const ModifyContent = ({ params }: PageProps) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await handleUploadedFile();
-    await SubmitData();
+    // Obtén la URL de la imagen, ya sea nueva o existente
+    const imageUrl = await handleUploadedFile();
+    await SubmitData(imageUrl);
   };
 
   return (
     <div className="flex flex-col min-h-screen">
       <header>
-        <Navbar2 />
+        <NavbarAdmin />
         <hr className="border border-red-400 w-5/6 mx-auto my-4"></hr>
       </header>
       <main className="flex-grow">
@@ -307,7 +300,7 @@ const ModifyContent = ({ params }: PageProps) => {
                   type="button"
                   className="w-[150px] bg-red-400 text-white rounded-full px-3 py-2"
                 >
-                  <a href="/AdminView/galleryAdmin" title="galeria">
+                  <a href="/adminView/galleryAdmin" title="galeria">
                     Cancelar
                   </a>
                 </button>

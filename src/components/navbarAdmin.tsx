@@ -39,7 +39,7 @@ const Navbar2 = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setAuthUser({ uid: user.uid, email: user.email });
-        console.log(`El UID del usuario es ${user.uid} ${user.email}`);
+        // console.log(`El UID del usuario es ${user.uid} ${user.email}`);
       } else {
         console.log("No hay usuario iniciado sesión");
       }
@@ -53,7 +53,7 @@ const Navbar2 = () => {
             url: Routes.isUnread,
             headers: { "Content-Type": "application/json" },
             // data: requestData,
-            data: { userId: "PFNnWVVK3cOSxci6oGkmxDqrc1n1" },
+            data: { userId: "wLFDMi24uieuhHdrqwdnIRdtM0N2" },
           });
           console.log(result.data);
           setUnread(result.data);
