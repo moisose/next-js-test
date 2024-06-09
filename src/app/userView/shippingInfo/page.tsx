@@ -43,7 +43,7 @@ const ShippingInfo = () => {
 
   const [authUser, setAuthUser] = useState({ uid: "", email: "" });
 
-  // obtains the user's uid and email
+  // Obtains the user's uid and email
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -52,19 +52,17 @@ const ShippingInfo = () => {
       } else {
         console.log("No hay usuario iniciado sesión");
       }
-    }, []);
+    });
 
     // Detener la suscripción cuando el componente se desmonta
     return () => unsubscribe();
   }, []);
 
-  /*
-  receives the data of the products in the cart and calculates the total cost of the purchase
-  */
+  // Receives the data of the products in the cart and calculates the total cost of the purchase
   useEffect(() => {
     const fetchData = async () => {
       const requestData = { userId: authUser.uid }; // cambiar por el userId del usuario logueado
-      // obtains the products in the cart
+      // Obtains the products in the cart
       try {
         const result = await axios.request({
           method: "post",
@@ -73,16 +71,16 @@ const ShippingInfo = () => {
           data: requestData,
         });
 
-        // function to obtain additional data from each product
+        // Function to obtain additional data from each product
         function fetchProductData(product) {
-          // make a request to the server to obtain the additional data
+          // Make a request to the server to obtain the additional data
           return axios
             .post(Routes.getProductByName, { name: product.name })
             .then((response) => {
-              // process the response
+              // Process the response
               const productData = response.data;
 
-              // add the additional data to the product object
+              // Add the additional data to the product object
               product.additionalData = productData;
 
               return product;
@@ -91,7 +89,7 @@ const ShippingInfo = () => {
               console.error(
                 `Error al obtener datos para ${product.name}: ${error.message}`
               );
-              return product; // in case of error, return the product without additional data
+              return product; // In case of error, return the product without additional data
             });
         }
 
@@ -125,25 +123,24 @@ const ShippingInfo = () => {
     e.preventDefault();
 
     if (provincia && canton && distrito && direccion && imagen) {
-      // Construye los datos para enviar a la API
-      const datos = { provincia, canton, distrito, direccion, imagen };
-
       const imageUrl = await handleUploadedFile();
+      if (!imageUrl) {
+        alert("Error al subir la imagen. Por favor, inténtelo de nuevo.");
+        return;
+      }
 
-      // formar la fecha
+      // Formar la fecha
       const date = new Date();
-
       const day = date.getDate();
       const month = date.getMonth() + 1;
       const year = date.getFullYear();
-
       const formatedDate = `${year}-${month}-${day}`;
 
       // Construye los datos para enviar a la API
       const data = {
         purchaseDetails: "Compra",
         products: products,
-        voucherId: downloadURL,
+        voucherId: imageUrl,
         aproxDeliveryDate: formatedDate,
         shippingAddress: `${provincia}, ${canton}, ${distrito}, ${direccion}`,
         shippingPrice: costoTotalFinal,
@@ -152,24 +149,20 @@ const ShippingInfo = () => {
       };
       console.log(data);
 
-      // Sube imagen y forma url
-
-      const fetchData = async () => {
-        try {
-          const result = await axios.request({
-            method: "post",
-            url: Routes.makePurchase,
-            headers: { "Content-Type": "application/json" },
-            data: data,
-          });
-          console.log("fetch");
-          console.log(result);
-          router.push("/userView/store");
-        } catch (error) {
-          console.error("Error al obtener datos:", error);
-        }
-      };
-      fetchData();
+      // Enviar los datos de la compra
+      try {
+        const result = await axios.request({
+          method: "post",
+          url: Routes.makePurchase,
+          headers: { "Content-Type": "application/json" },
+          data: data,
+        });
+        console.log("fetch");
+        console.log(result);
+        router.push("/userView/store");
+      } catch (error) {
+        console.error("Error al enviar los datos:", error);
+      }
     } else {
       alert("Por favor, complete todos los campos.");
     }
@@ -195,7 +188,7 @@ const ShippingInfo = () => {
       const imageURL = URL.createObjectURL(files[0]);
       setImagenURL(imageURL);
     } else {
-      MessageChannel.error("File size to large");
+      MessageChannel.error("File size too large");
     }
   };
 
@@ -204,37 +197,40 @@ const ShippingInfo = () => {
       const name = imageFile.name;
       const storageRef = ref(storage, `image/${name}`);
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-          // setProgressUpload(progress); // to show progress upload
+      return new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            console.error(error.message);
+            reject(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+              // url is the download URL of the file
+              setDownloadURL(url);
+              console.log(url);
+              resolve(url);
+            });
           }
-        },
-        (error) => {
-          message.error(error.message);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            //url is download url of file
-            setDownloadURL(url);
-            console.log(url);
-            return url;
-          });
-        }
-      );
+        );
+      });
     } else {
-      message.error("File not found");
+      console.error("File not found");
+      return null;
     }
   }
 
@@ -244,42 +240,8 @@ const ShippingInfo = () => {
       const ProductCost = product.quantity * product.additionalData.price;
       total += ProductCost;
     }
-    // return costoTotal;
     setCostoTotal(total);
     setCostoTotalFinal(total + costoEnvio);
-  }
-
-  async function deleteImageFromStorage() {
-    // Parsea el enlace para obtener la referencia al objeto en Storage
-    const imageURL =
-      "https://firebasestorage.googleapis.com/v0/b/proyectodisenno-7d92d.appspot.com/o/image%2Fgato.jpg?alt=media&token=3cfbe4d0-ef4f-4910-b5ea-35c6a9ed6d7b";
-    try {
-      // Crea un objeto URL a partir del URL proporcionado
-      const url = new URL(imageURL);
-
-      // Obtiene la parte del pathname que contiene el nombre del archivo
-      const pathname = url.pathname;
-
-      // Decodifica la parte del pathname y quita la parte "image/" del principio del nombre del archivo
-      const decodedFileName = decodeURIComponent(
-        pathname.substring(pathname.lastIndexOf("/") + 1)
-      ).replace(/^image\//, "");
-
-      console.log(
-        'Nombre del archivo de imagen sin "image/":',
-        decodedFileName
-      );
-
-      console.log("Nombre del archivo de imagen:", decodedFileName);
-      // Genera una referencia al objeto en Storage
-      const storageRef = ref(storage, `image/${decodedFileName}`); // Ruta completa al objeto
-
-      // Elimina el objeto de Storage
-      await deleteObject(storageRef);
-      console.log("Imagen eliminada con éxito.");
-    } catch (error) {
-      console.error("Error al eliminar la imagen:", error);
-    }
   }
 
   return (
